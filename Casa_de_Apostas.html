@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+	<h1>The Betting House.</h1>  
+
+	<input/>
+	<button> Place your bets!!!</button>
+
+</html>
+
+<script type="text/javascript">
+
+	function pulaLinha() {
+    	document.write("<br>");
+    	document.write("<br>");
+	};
+
+	function mostra(frase) {
+		document.write(frase);
+    	pulaLinha();
+	};
+
+	var totalVips = parseInt(prompt("Enter the number of players:"));
+	var premio = 0;
+	var vips = 1;
+
+	for(vips; vips <= totalVips; vips ++){ 
+      var aposta = parseInt(prompt("Place your bet:"));
+      premio = premio + aposta
+    };
+
+    function sorteia(){
+     	return Math.round(Math.random() * 10)
+    };
+
+    function sorteiaNumero(quantidade){
+
+        var numerosPensados = [];
+        var numeros = 1;
+        while(numeros <= quantidade){
+
+        	var numeroAleatorio = sorteia();
+        	var achou = false;
+
+        	if(numeroAleatorio !== 0){
+
+            for(var posição = 0; posição < numerosPensados.length; posição++){
+
+                if(numerosPensados[posição] == numeroAleatorio){
+                    
+                    achou = true;
+                    break;
+                }
+            } 
+
+            if (achou == false){
+               numerosPensados.push(numeroAleatorio);
+               numeros++;
+            }
+           } 
+        }
+
+        return numerosPensados
+     };
+
+	var numerosPensados = sorteiaNumero(3);	
+	var input = document.querySelector("input");
+    input.focus();
+
+    function verifica(){
+
+        var achou = false;
+
+        for(var posição = 0; posição < numerosPensados.length; posição++){
+
+            if(input.value == numerosPensados[posição]) {
+            alert("Congratulations!!! You wow " + premio + " dollars playing this game.");
+            achou = true;
+            break;
+            }
+
+        }
+
+        if (achou == false){
+            alert("Too bad, try again!")
+        }
+
+
+        input.value = "";
+        input.focus();
+
+   
+    };
+
+    var button = document.querySelector("button");
+    button.onclick = verifica;
+
+</script>
